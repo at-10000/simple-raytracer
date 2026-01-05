@@ -1,7 +1,10 @@
 use log :: {info, warn};
 mod vec3mod;
+use crate :: vec3mod :: Vec3; 
 
 fn main() {
+    /*
+
     let image_width: i32 = 256;
     let image_height: i32 = 256;
     
@@ -27,6 +30,31 @@ fn main() {
             print!("{} {} {}\n", ir, ig, ib);
         }
     }
+
+    */
+
+    let mut vec1: Vec3 = Vec3 :: new();
+    vec1.e[0] = 1.237;
+    vec1.e[1] = 17.893;
+    vec1.e[2] = -14.487;
+
+    let mut vec2: Vec3 = Vec3 :: new();
+
+    vec2.e[0] = 2.424;
+    vec2.e[1] = -3.643;
+    vec2.e[2] = 27.149;
+
+    let mut vec3: Vec3 = Vec3 :: new();
+
+    vec3 = vec1 + vec2;
+
+    println!("vec1: {} {} {}", vec1.x(), vec1.y(), vec1.z());
+    println!("vec2: {} {} {}", vec2.x(), vec2.y(), vec2.z());
+    println!("Sum: ");
+    println!("vec3: {} {} {}", vec3.x(), vec3.y(), vec3.z());
+    vec3 = vec1 - vec2;
+    println!("Sum: ");
+    println!("vec3: {} {} {}", vec3.x(), vec3.y(), vec3.z());
 }
 
 
