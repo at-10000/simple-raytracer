@@ -55,6 +55,14 @@ fn main() {
     vec3 = vec1 - vec2;
     println!("Sum: ");
     println!("vec3: {} {} {}", vec3.x(), vec3.y(), vec3.z());
+    vec3 = vec1 * vec2;
+    println!("vec3: {} {} {}", vec3.x(), vec3.y(), vec3.z());
+    vec3 = vec1 * 2.0;
+    println!("vec3: {} {} {}", vec3.x(), vec3.y(), vec3.z());
+    vec3 = vec1 / 2.0;
+    println!("vec3: {} {} {}", vec3.x(), vec3.y(), vec3.z());
 }
+
+
 
 
