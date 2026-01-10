@@ -82,7 +82,35 @@ impl Div<f32> for Vec3 {
     }
 }
 
-// pub fn dot () -> Vec3 {}
+impl Vec3 {
+    pub fn length_squared (&self) -> f32 {
+        self.e[0] * self.e[0] + self.e[1] * self.e[1] + self.e[2] * self.e[2]
+    }
+    pub fn length (&self) -> f32 {
+        let mut result: f32 = 0.0;
+        result = self.length_squared();
+        result = result.sqrt();
+        result
+    }
+    pub fn unit_vector (v: Vec3) -> Vec3 {
+        let mut result: Vec3 = Vec3 :: new();
+        result = v / v.length();
+        result
+    }
+}
+
+pub fn dot (u: Vec3, v: Vec3) -> f32 {
+    let result: f32 = u.e[0] * v.e[0] + u.e[1] * v.e[1] + u.e[2] * v.e[2];
+    result
+}
+
+pub fn cross (u: Vec3, v: Vec3) -> Vec3 {
+    let mut result: Vec3 = Vec3 :: new();
+    result.e[0] = u.e[1] * v.e[2] - u.e[2] * v.e[1];
+    result.e[1] = u.e[2] * v.e[0] - u.e[0] * v.e[2];
+    result.e[2] = u.e[0] * v.e[1] - u.e[1] * v.e[0];
+    result
+}
 
 
 
