@@ -1,6 +1,12 @@
 use log :: {info, warn};
+
 mod vec3mod;
-use crate :: vec3mod :: Vec3; 
+mod color;
+mod ray;
+
+use crate :: vec3mod :: { Vec3, Point3 }; 
+use crate :: color :: Color;
+use crate :: ray :: Ray;
 
 fn main() {
     /*
@@ -62,7 +68,5 @@ fn main() {
     vec3 = vec1 / 2.0;
     println!("vec3: {} {} {}", vec3.x(), vec3.y(), vec3.z());
 }
-
-
 
 

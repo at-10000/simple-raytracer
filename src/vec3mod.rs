@@ -1,6 +1,6 @@
 use std :: ops :: {Add, Sub, Mul, Div};
 
-#[derive(Clone, Copy)]
+#[derive(Clone, Copy, PartialEq, Debug)]
 pub struct Vec3 {
     pub e: [f32; 3],
 }
@@ -112,5 +112,141 @@ pub fn cross (u: Vec3, v: Vec3) -> Vec3 {
     result
 }
 
+pub type Point3 = Vec3;
+
+
+#[cfg(test)]
+mod vec3_tests {
+    use super :: *;
+
+    #[test]
+    fn test_add () {
+
+        let mut vec1: Vec3 = Vec3 :: new();
+        vec1.e[0] = 1.237;
+        vec1.e[1] = 17.893;
+        vec1.e[2] = -14.487;
+
+        let mut vec2: Vec3 = Vec3 :: new();
+
+        vec2.e[0] = 2.424;
+        vec2.e[1] = -3.643;
+        vec2.e[2] = 27.149;
+
+        let mut vec3: Vec3 = Vec3 :: new();
+
+        vec3.e[0] = 3.661;
+        vec3.e[1] = 14.25;
+        vec3.e[2] = 12.662;
+
+        assert!((vec1 + vec2) == vec3);
+    }
+
+    #[test]
+    fn test_sub() {
+        let mut vec1 = Vec3::new();
+        vec1.e = [5.0, 7.0, 3.0];
+
+        let mut vec2 = Vec3::new();
+        vec2.e = [2.0, 1.0, 5.0];
+
+        let mut expected = Vec3::new();
+        expected.e = [3.0, 6.0, -2.0];
+
+        assert_eq!(vec1 - vec2, expected);
+    }
+
+    #[test]
+    fn test_scalar_mul() {
+        let mut vec = Vec3::new();
+        vec.e = [1.0, -2.0, 3.5];
+
+        let scalar = 2.0;
+
+        let mut expected = Vec3::new();
+        expected.e = [2.0, -4.0, 7.0];
+
+        assert_eq!(vec * scalar, expected);
+    }
+
+    #[test]
+    fn test_vector_mul() {
+        let mut vec1 = Vec3::new();
+        vec1.e = [1.0, 2.0, 3.0];
+
+        let mut vec2 = Vec3::new();
+        vec2.e = [4.0, -1.0, 0.5];
+
+        let mut expected = Vec3::new();
+        expected.e = [4.0, -2.0, 1.5];
+
+        assert_eq!(vec1 * vec2, expected);
+    }
+
+    #[test]
+    fn test_div() {
+        let mut vec = Vec3::new();
+        vec.e = [4.0, -8.0, 2.0];
+
+        let divisor = 2.0;
+
+        let mut expected = Vec3::new();
+        expected.e = [2.0, -4.0, 1.0];
+
+        assert_eq!(vec / divisor, expected);
+    }
+
+    #[test]
+    fn test_length_and_length_squared() {
+        let mut vec = Vec3::new();
+        vec.e = [3.0, 4.0, 12.0];
+
+        assert_eq!(vec.length_squared(), 3.0*3.0 + 4.0*4.0 + 12.0*12.0);
+        assert_eq!(vec.length(), 13.0);
+    }
+
+    #[test]
+    fn test_unit_vector() {
+        let mut vec = Vec3::new();
+        vec.e = [0.0, 3.0, 4.0];
+
+        let unit = Vec3::unit_vector(vec);
+        let length = unit.length();
+
+        // The unit vector should have length 1
+        assert!((length - 1.0).abs() < 1e-6);
+    }
+
+    #[test]
+    fn test_dot_product() {
+        let mut u = Vec3::new();
+        u.e = [1.0, 2.0, 3.0];
+
+        let mut v = Vec3::new();
+        v.e = [4.0, -5.0, 6.0];
+
+        let expected = 1.0*4.0 + 2.0*(-5.0) + 3.0*6.0;
+
+        assert_eq!(dot(u, v), expected);
+    }
+
+    #[test]
+    fn test_cross_product() {
+        let mut u = Vec3::new();
+        u.e = [1.0, 2.0, 3.0];
+
+        let mut v = Vec3::new();
+        v.e = [4.0, 5.0, 6.0];
+
+        let mut expected = Vec3::new();
+        expected.e = [
+            2.0*6.0 - 3.0*5.0,  // 12 - 15 = -3
+            3.0*4.0 - 1.0*6.0,  // 12 - 6 = 6
+            1.0*5.0 - 2.0*4.0   // 5 - 8 = -3
+        ];
+
+        assert_eq!(cross(u, v), expected);
+    }
+}
 
 
